@@ -79,6 +79,52 @@ The host to connect to
 
 The port of the ldap directory
 
+[id="plugins-{type}s-{plugin}-anonymous"]
+===== `anonymous` 
+
+  * Value type is <<boolean, boolean>>
+  * Default value is `false`
+
+Tells wether the bind is anonymous or not. If not <<plugins-{type}s-{plugin}-dn>> and <<plugins-{type}s-{plugin}-password>> MUST be set
+
+[id="plugins-{type}s-{plugin}-dn"]
+===== `dn` 
+
+  * Value type is <<string, string>>
+
+The user DN to bind with
+
+[id="plugins-{type}s-{plugin}-password"]
+===== `password` 
+
+  * Value type is <<password, password>>
+
+The user password to bind with
+
+[id="plugins-{type}s-{plugin}-base"]
+===== `base` 
+
+  * Value type is <<string, string>>
+
+The base DN of the search
+
+[id="plugins-{type}s-{plugin}-filters"]
+===== `dn` 
+
+  * Value type is <<array, array>>
+  * Default value is `[ { field => "objectclass" value => "inetorgperson"} ]`
+
+Array of hashes defining filters for the current search (example: `[ { field => "objectclass" value => "inetorgperson"}, { field => "mail" value => "*@acme.com" } ]` )
+
+[id="plugins-{type}s-{plugin}-attrs"]
+===== `attrs` 
+
+  * Value type is <<array, array>>
+  * Default value is `[ "uid", "mail" ]`
+
+Array of LDAP attributes you wanna get from that search
+
+
 
 [id="plugins-{type}s-{plugin}-common-options"]
 include::{include_path}/{type}.asciidoc[]

@@ -1,4 +1,4 @@
-# Logstash Plugin
+# NetLdap Logstash Plugin
 
 This is a plugin for [Logstash](https://github.com/elastic/logstash).
 
@@ -10,10 +10,7 @@ Logstash provides infrastructure to automatically build documentation for this p
 
 * For formatting config examples, you can use the asciidoc `[source,json]` directive
 * For more asciidoc formatting tips, see the excellent reference here https://github.com/elastic/docs#asciidoc-guide
-
-## Need Help?
-
-Need help? Try #logstash on freenode IRC or the https://discuss.elastic.co/c/logstash discussion forum.
+* Information for this plugin configuration can be found [here](docs/index.asciidoc)
 
 ## Developing
 
@@ -39,12 +36,6 @@ bundle install
 bundle install
 ```
 
-* Run tests
-
-```sh
-bundle exec rspec
-```
-
 ### 2. Running your unpublished Plugin in Logstash
 
 #### 2.1 Run in a local Logstash clone
@@ -52,7 +43,7 @@ bundle exec rspec
 * Edit Logstash `Gemfile` and add the local plugin path, for example:
 
 ```ruby
-gem "logstash-filter-awesome", :path => "/your/local/logstash-filter-awesome"
+gem "logstash-input-netldap", :path => "/your/local/logstash-input-netldap"
 ```
 
 * Install plugin
@@ -68,7 +59,7 @@ bin/plugin install --no-verify
 * Run Logstash with your plugin
 
 ```sh
-bin/logstash -e 'filter {awesome {}}'
+bin/logstash -e 'filter {netldap {[...]}}'
 ```
 
 At this point any modifications to the plugin code will be applied to this local Logstash setup. After modifying the plugin, simply rerun Logstash.
@@ -80,7 +71,7 @@ You can use the same **2.1** method to run your plugin in an installed Logstash 
 * Build your plugin gem
 
 ```sh
-gem build logstash-filter-awesome.gemspec
+gem build logstash-input-netldap.gemspec
 ```
 
 * Install the plugin from the Logstash home

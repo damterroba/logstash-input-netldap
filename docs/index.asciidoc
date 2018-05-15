@@ -1,0 +1,87 @@
+:plugin: netldap
+:type: input
+:default_codec: plain
+
+///////////////////////////////////////////
+START - GENERATED VARIABLES, DO NOT EDIT!
+///////////////////////////////////////////
+:version: %VERSION%
+:release_date: %RELEASE_DATE%
+:changelog_url: %CHANGELOG_URL%
+:include_path: ../../../../logstash/docs/include
+///////////////////////////////////////////
+END - GENERATED VARIABLES, DO NOT EDIT!
+///////////////////////////////////////////
+
+[id="plugins-{type}s-{plugin}"]
+
+=== NetLdap input plugin
+
+include::{include_path}/plugin_header.asciidoc[]
+
+==== Description
+
+This plugin was created as a way to ingest data in a LDAP directory into Logstast.
+
+==== Usage
+
+Here is an example of setting up the plugin to get ldap entries from a LDAP directory
+
+[source, ruby]
+------------------------------------------------------------------------------
+input {
+    netldap{
+        ldap_host => "ldap.acme.com"
+        port => 389
+        anonymous => false
+        dn => "uid=myuser,ou=people,dc=acme,dc=com"
+        password => "strongpassword"
+        base => "ou=people,dc=acme,dc=com"
+        attrs => ["uid", "cn", "sn", "givenname", "mail"]
+        filters => [{field=>"objectclass" value=>"inetorgperson"} ]
+    }
+}
+------------------------------------------------------------------------------
+
+[id="plugins-{type}s-{plugin}-options"]
+==== NetLdap Input Configuration Options
+
+This plugin supports the following configuration options plus the <<plugins-{type}s-{plugin}-common-options>> described later.
+
+[cols="<,<,<",options="header",]
+|=======================================================================
+|Setting |Input type|Required
+| <<plugins-{type}s-{plugin}-ldap_host>> |{logstash-ref}/configuration-file-structure.html#string[string]|Yes
+| <<plugins-{type}s-{plugin}-port>> |{logstash-ref}/configuration-file-structure.html#number[number]|Yes
+| <<plugins-{type}s-{plugin}-anonymous>> |{logstash-ref}/configuration-file-structure.html#boolean[boolean]|Yes
+| <<plugins-{type}s-{plugin}-dn>> |{logstash-ref}/configuration-file-structure.html#string[string]|No
+| <<plugins-{type}s-{plugin}-password>> |{logstash-ref}/configuration-file-structure.html#password[password]|No
+| <<plugins-{type}s-{plugin}-base>> |{logstash-ref}/configuration-file-structure.html#string[string]|Yes
+| <<plugins-{type}s-{plugin}-filters>> |{logstash-ref}/configuration-file-structure.html#array[array]|Yes
+| <<plugins-{type}s-{plugin}-attrs>> |{logstash-ref}/configuration-file-structure.html#array[array]|Yes
+|=======================================================================
+
+Also see <<plugins-{type}s-{plugin}-common-options>> for a list of options supported by all
+input plugins.
+
+[id="plugins-{type}s-{plugin}-setting_name"]
+===== `setting_name` 
+
+  * Value type is {logstash-ref}/configuration-file-structure.html#boolean[boolean]
+  * Default value is `true`
+
+ADD DESCRIPTION HERE.
+
+[id="plugins-{type}s-{plugin}-another_setting_name"]
+===== `another_setting_name` 
+
+  * Value type is <<hash,hash>>
+  * Default value is `{}`
+
+ADD DESCRIPTION HERE.
+
+
+[id="plugins-{type}s-{plugin}-common-options"]
+include::{include_path}/{type}.asciidoc[]
+
+:default_codec!:

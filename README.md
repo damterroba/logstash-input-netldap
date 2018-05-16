@@ -10,7 +10,7 @@ Logstash provides infrastructure to automatically build documentation for this p
 
 * For formatting config examples, you can use the asciidoc `[source,json]` directive
 * For more asciidoc formatting tips, see the excellent reference here https://github.com/elastic/docs#asciidoc-guide
-* Information for this plugin configuration can be found [here](docs/index.asciidoc)
+* Information for this plugin configuration can be found [here](https://github.com/damterroba/logstash-input-netldap/blob/master/docs/index.asciidoc)
 
 ## Developing
 

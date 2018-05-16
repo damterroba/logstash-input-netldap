@@ -20,8 +20,7 @@ END - GENERATED VARIABLES, DO NOT EDIT!
 include::{include_path}/plugin_header.asciidoc[]
 
 ==== Description
-
-This plugin was created as a way to ingest data in a LDAP directory into Logstast.
+This plugin was created as a way to ingest data in a LDAP directory into Logstash.
 
 ==== Usage
 

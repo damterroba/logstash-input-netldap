@@ -125,7 +125,7 @@ Array of hashes defining filters for the current search (example: `[ { field =>
 Array of LDAP attributes you wanna get from that search
 
 [id="plugins-{type}s-{plugin}-schedule"]
-===== `attrs` 
+===== `schedule` 
 
   * Value type is <<string, string>>
 

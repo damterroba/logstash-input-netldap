@@ -5,7 +5,7 @@ require "stud/interval"
 require "socket" # for Socket.gethostname
 require "base64"
 require "rubygems"
-require "net/ldap"
+
 
 # Performs a LDAP search using net-ldap. 
 #
@@ -56,8 +56,13 @@ class LogStash::Inputs::NetLdap < LogStash::Inputs::Base
   # Specify the attributes you wanna get for each entry
   config :attrs, :validate => :array, :default => ["uid", "mail"]
 
+  # Use of rufus-scheduler
+  config :schedule, :validate => :string
+
   public
   def register
+    require "net/ldap"
+    require "rufus/scheduler"
     @host = Socket.gethostname
     
     if @anonymous
@@ -78,7 +83,19 @@ class LogStash::Inputs::NetLdap < LogStash::Inputs::Base
   end
 
   def run(queue)
-    # Filters def
+    if @schedule
+      @scheduler = Rufus::Scheduler.new(:max_work_threds => 1)
+      @scheduler.cron @schedule do
+        execute_search(queue)
+      end
+      @scheduler.join
+    else
+      execute_search(queue)
+    end
+  end
+  
+  def execute_search(queue)
+     # Filters def
     finalFilter = "" # need to initialize this outside the each
     @filters.each.with_index do |hashFilter, index|
       tmpFilter = Net::LDAP::Filter.eq(hashFilter['field'], hashFilter['value'])
@@ -104,5 +121,9 @@ class LogStash::Inputs::NetLdap < LogStash::Inputs::Base
       end
       queue << event
     end
-  end 
+  end
+
+  def stop
+    @scheduler.shutdown(:wait) if @scheduler
+  end
 end

@@ -63,6 +63,9 @@ class LogStash::Inputs::NetLdap < LogStash::Inputs::Base
     if @anonymous
       auth = { :method => :anonymous}
     else
+      if @dn.nil? or @password.nil?
+        raise(LogStash::ConfigurationError, ":dn and :password must be set when bind is not anonymous.")
+      end
       auth = {
         :method => :simple,
         :username => @dn,
